@@ -1,0 +1,32 @@
+body {
+    font-family: Helvetica;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+nav {
+    font-family: Ubuntu;
+    font-size: 1.2em;
+}
+.page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #5afcd9;
+    overflow: visible;
+}
+
+.page-header ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    overflow: visible;
+}
+
+.page-header a {
+    display: block;
+    padding: 0.5em;
+    text-decoration: none;
+}
