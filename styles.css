@@ -15,6 +15,7 @@ nav {
     justify-content: space-between;
     background-color: #5afcd9;
     overflow: visible;
+    font-size: 1.2em;
 }
 
 .page-header ul {
@@ -29,4 +30,49 @@ nav {
     display: block;
     padding: 0.5em;
     text-decoration: none;
+}
+
+.items {
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1em;
+}
+
+.items img {
+    width: 100%;
+    height: auto;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    padding: 0.5em;
+}
+
+.item img {
+    padding-bottom: 0.5em;
+    border-bottom: solid 3px black;
+}
+
+.item p:nth-child(3) {
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: auto;
+}
+
+.item p:nth-child(2) {
+    font-size: 1em;
+}
+
+button {
+    font-size: 1em;
+    width: 100%;
+    height: 4em;
+    background-color: rgb(133,187,101);
+    border-style: ridge;
+    border-radius: 4px;
+    margin-top: auto;
 }

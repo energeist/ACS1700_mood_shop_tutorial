@@ -16,10 +16,10 @@ for (let i = 0; 1 < data.length; i++) {
     newDiv.appendChild(img);
     // console.log(img); // Check the console!
     itemsContainer.appendChild(newDiv);
-    const desc = document.createElement('P');
+    const desc = document.createElement('p');
     desc.innerText = data[i].desc;
     newDiv.appendChild(desc);
-    const price = document.createElement('P');
+    const price = document.createElement('p');
     price.innerText = data[i].price;
     newDiv.appendChild(price);
     const button = document.createElement('button');
