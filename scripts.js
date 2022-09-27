@@ -28,3 +28,18 @@ for (let i = 0; 1 < data.length; i++) {
     button.innerHTML = "Add to Cart";
     newDiv.appendChild(button);
 }
+
+const cart = [];
+
+function addItem(name, price) {
+    const item = {name: name, price: price, qty: 1}
+    cart.push(item);
+}
+
+function showItems() {
+    console.log(cart);
+}
+
+addItem('apple', 0.99)
+addItem('orange', 1.29)
+showItems()
