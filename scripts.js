@@ -32,14 +32,43 @@ for (let i = 0; 1 < data.length; i++) {
 const cart = [];
 
 function addItem(name, price) {
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name === name) {
+            cart[i].qty++
+            return
+        }
+    }
     const item = {name: name, price: price, qty: 1}
     cart.push(item);
 }
 
 function showItems() {
-    console.log(cart);
+    for (let i = 0; i < cart.length; i++) {
+        console.log(`- ${cart[i].name}, $${cart[i].price} x ${cart[i].qty}}`)
+    }
 }
 
+function getQty() {
+    let totalItems = 0
+    for (let i = 0; i < cart.length; i++) {
+        totalItems += cart[i].qty
+    }
+    return totalItems;
+}
+
+function getTotal() {
+    let total = 0
+    for (let i = 0; i < cart.length; i++) {
+        total += cart[i].price * cart[i].qty
+    }
+    total = total.toFixed(2)
+    return total
+}
+
+
+addItem('apple', 0.99)
 addItem('apple', 0.99)
 addItem('orange', 1.29)
+console.log(`You have ${getQty()} items in your cart`)
 showItems()
+console.log(`Your cart total is: $${getTotal()}`)
