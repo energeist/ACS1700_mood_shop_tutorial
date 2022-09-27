@@ -3,6 +3,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     margin: 0;
+    background-color:#5afcd9
 }
 
 nav {
@@ -50,6 +51,8 @@ nav {
     flex-direction: column;
     border: solid 1px black;
     padding: 0.5em;
+    background-color: bisque;
+    margin-top: 1em;
 }
 
 .item img {
