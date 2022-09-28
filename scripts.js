@@ -42,6 +42,27 @@ function addItem(name, price) {
     cart.push(item);
 }
 
+function subtractItem(name, num = 0) {
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name === name) {
+            if (cart[i].qty > 0) {
+                cart[i].qty -= num
+            }
+            // if (cart[i].qty < 1 || cart.qty[i] === 0) {
+            //     removeItem(name)
+            // }
+        }
+    }
+}
+
+function removeItem(name) {
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name === name) {
+            cart.splice(i, 1)
+        }
+    }
+}
+
 function showItems() {
     for (let i = 0; i < cart.length; i++) {
         console.log(`- ${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`)
@@ -69,6 +90,13 @@ function getTotal() {
 addItem('apple', 0.99)
 addItem('apple', 0.99)
 addItem('orange', 1.29)
+addItem('orange', 1.29)
+addItem('orange', 1.29)
+console.log(`You have ${getQty()} items in your cart`)
+showItems()
+console.log(`Your cart total is: $${getTotal()}`)
+removeItem('apple')
+subtractItem('orange')
 console.log(`You have ${getQty()} items in your cart`)
 showItems()
 console.log(`Your cart total is: $${getTotal()}`)
