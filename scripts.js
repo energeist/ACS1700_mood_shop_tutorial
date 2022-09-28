@@ -1,6 +1,9 @@
 // import data from './data.js';
 
-// const itemsContainer = document.querySelector("#items");
+const itemsContainer = document.querySelector("#items");
+const itemList = document.getElementById('item-list');
+const totalDiv = document.getElementById('total-price');
+const quantityDiv = document.getElementById('quantity-items')
 
 // for (let i = 0; 1 < data.length; i++) {
 //     // Create a new div element and give it a class name
@@ -48,9 +51,9 @@ function subtractItem(name, num = 0) {
             if (cart[i].qty > 0) {
                 cart[i].qty -= num
             }
-            // if (cart[i].qty < 1 || cart.qty[i] === 0) {
-            //     removeItem(name)
-            // }
+            if (cart[i].qty < 1) {
+                removeItem(name)
+            }
         }
     }
 }
@@ -64,9 +67,12 @@ function removeItem(name) {
 }
 
 function showItems() {
+    let itemStr = ''
     for (let i = 0; i < cart.length; i++) {
-        console.log(`- ${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`)
+        itemStr +=(`<li>${cart[i].name}, $${cart[i].price} x ${cart[i].qty} = $${(cart[i].price * cart[i].qty)} </li>`)
     }
+    itemList.innerHTML = itemStr
+
 }
 
 function getQty() {
@@ -81,6 +87,7 @@ function getTotal() {
     let total = 0
     for (let i = 0; i < cart.length; i++) {
         total += cart[i].price * cart[i].qty
+        console.log(total)
     }
     total = total.toFixed(2)
     return total
@@ -92,11 +99,14 @@ addItem('apple', 0.99)
 addItem('orange', 1.29)
 addItem('orange', 1.29)
 addItem('orange', 1.29)
+showItems()
+quantityDiv.innerHTML = `You have ${getQty()} items in your cart`
+totalDiv.innerHTML = `Your cart total is: $${getTotal()}`
 console.log(`You have ${getQty()} items in your cart`)
 showItems()
 console.log(`Your cart total is: $${getTotal()}`)
-removeItem('apple')
-subtractItem('orange')
+// subtractItem('apple', 1)
+// subtractItem('orange', 3)
 console.log(`You have ${getQty()} items in your cart`)
 showItems()
 console.log(`Your cart total is: $${getTotal()}`)
