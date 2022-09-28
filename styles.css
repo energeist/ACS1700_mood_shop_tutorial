@@ -79,3 +79,9 @@ button {
     border-radius: 4px;
     margin-top: auto;
 }
+
+/* footer {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+} */
