@@ -85,8 +85,7 @@ button.remove, button.add-one, button.subtract-one {
     height: 25px;
     background-color: bisque;
 }
-/* footer {
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-} */
+
+ul {
+    list-style: none;
+}
