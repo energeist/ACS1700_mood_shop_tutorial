@@ -35,34 +35,73 @@ for (let i = 0; i < data.length; i++) {
 
 const cart = [];
 
+const all_items_button = Array.from(document.querySelectorAll("button"))
+
+all_items_button.forEach(elt => elt.addEventListener('click', () => {
+    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
+    showItems()
+}))
+
+itemList.onchange = function(e) {
+    if (e.target && e.target.classList.contains('update')) {
+        const name = e.target.dataset.name;
+        const qty = parseInt(e.target.value);
+        updateCart(name, qty);
+    }
+}
+
+itemList.onclick = function(e) {
+    if (e.target && e.target.classList.contains('remove')) {
+        const name = e.target.dataset.name
+        // console.log(e.target)
+        removeItem(name)
+    } else if (e.target && e.target.classList.contains('add-one')) {
+        const name = e.target.dataset.name
+        addItem(name)
+    } else if (e.target && e.target.classList.contains('subtract-one')) {
+        const name = e.target.dataset.name
+        removeItem(name, 1)
+    }
+}
+
 function addItem(name, price) {
+	for (let i = 0; i < cart.length; i++) {
+		if (cart[i].name === name) {
+			cart[i].qty += 1
+			showItems()
+			return
+		}
+	}
+	
+	const item = {name, price, qty: 1}
+	cart.push(item)
+}
+
+function removeItem(name, qty = 0) {
+	for (let i = 0; i < cart.length; i++) {
+		if (cart[i].name === name) {
+			if (qty > 0) {
+				cart[i].qty -= qty
+			}
+			if (cart[i].qty < 1 || qty === 0) {
+				cart.splice(i, 1)
+			}
+			showItems()
+			return
+		}
+	}
+}
+
+function updateCart(name, qty) {
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].name === name) {
-            cart[i].qty++
+            if (qty < 1) {
+                removeItem(name);
+                return
+            }
+            cart[i].qty = qty;
+            showItems()
             return
-        }
-    }
-    const item = {name, price, qty: 1}
-    cart.push(item);
-}
-
-function subtractItem(name, num = 0) {
-    for (let i = 0; i < cart.length; i++) {
-        if (cart[i].name === name) {
-            if (cart[i].qty > 0) {
-                cart[i].qty -= num
-            }
-            if (cart[i].qty < 1) {
-                removeItem(name)
-            }
-        }
-    }
-}
-
-function removeItem(name) {
-    for (let i = 0; i < cart.length; i++) {
-        if (cart[i].name === name) {
-            cart.splice(i, 1)
         }
     }
 }
@@ -70,7 +109,14 @@ function removeItem(name) {
 function showItems() {
     let itemStr = ''
     for (let i = 0; i < cart.length; i++) {
-        itemStr +=(`<li>${cart[i].name}, $${cart[i].price} x ${cart[i].qty} = $${(cart[i].price * cart[i].qty)} </li>`)
+        const { name, price, qty } = cart[i]
+        itemStr +=(`<li>
+        ${name}, $${price} x ${qty} = $${(price * qty)} 
+        <button class="remove" data-name="${name}">Remove</button>
+        <button class="add-one" data-name="${name}"> + </button>
+        <button class="subtract-one" data-name="${name}"> - </button>
+        <input class="update" type="number" min="0" data-name="${name}">
+        </li>`)
     }
     itemList.innerHTML = itemStr
     quantityDiv.innerHTML = `You have ${getQty()} items in your cart`
@@ -78,43 +124,19 @@ function showItems() {
 }
 
 function getQty() {
-    let totalItems = 0
+    let qty = 0
     for (let i = 0; i < cart.length; i++) {
-        totalItems += cart[i].qty
+        qty += cart[i].qty
     }
-    return totalItems;
+    return qty;
 }
 
 function getTotal() {
     let total = 0
     for (let i = 0; i < cart.length; i++) {
         total += cart[i].price * cart[i].qty
-        console.log(total)
+        // console.log(total)
     }
-    total = total.toFixed(2)
-    return total
+    return total.toFixed(2)
 }
 
-
-addItem('apple', 0.99)
-addItem('apple', 0.99)
-addItem('orange', 1.29)
-addItem('orange', 1.29)
-addItem('orange', 1.29)
-showItems()
-
-console.log(`You have ${getQty()} items in your cart`)
-showItems()
-console.log(`Your cart total is: $${getTotal()}`)
-subtractItem('apple', 1)
-subtractItem('orange', 3)
-console.log(`You have ${getQty()} items in your cart`)
-showItems()
-console.log(`Your cart total is: $${getTotal()}`)
-const all_items_button = Array.from(document.querySelectorAll("button"))
-console.log(all_items_button)
-
-all_items_button.forEach(elt => elt.addEventListener('click', () => {
-    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
-    showItems()
-}))

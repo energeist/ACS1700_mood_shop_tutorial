@@ -80,6 +80,11 @@ button {
     margin-top: auto;
 }
 
+button.remove, button.add-one, button.subtract-one {
+    width: auto;
+    height: 25px;
+    background-color: bisque;
+}
 /* footer {
     min-height: 300px;
     display: flex;
