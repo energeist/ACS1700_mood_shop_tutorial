@@ -41,7 +41,7 @@ all_items_button.forEach(elt => elt.addEventListener('click', () => {
     addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
     showItems()
 }))
-
+showItems()
 itemList.onchange = function(e) {
     if (e.target && e.target.classList.contains('update')) {
         const name = e.target.dataset.name;
@@ -110,8 +110,8 @@ function showItems() {
     let itemStr = ''
     for (let i = 0; i < cart.length; i++) {
         const { name, price, qty } = cart[i]
-        itemStr +=(`<li>
-        ${name}, $${price} x ${qty} = $${(price * qty)} 
+        itemStr +=(`<li class="cart-list">
+        ${name}, $${price} x ${qty} = $${(price * qty).toFixed(2)} 
         <button class="remove" data-name="${name}">Remove</button>
         <button class="add-one" data-name="${name}"> + </button>
         <button class="subtract-one" data-name="${name}"> - </button>
